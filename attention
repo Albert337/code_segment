@@ -3,10 +3,10 @@ class atteblock(gluon.nn.HybridBlock):
         super(atteblock, self).__init__()
 
         self.dimension = dimension
-        if dimension ==2:
+        if dimension ==2:   ###为图像输入
             self.avg_pool = nn.AvgPool2D()
             self.max_pool = nn.MaxPool2D()
-        elif dimension ==1:
+        elif dimension ==1:  ###为文本信息输入
             self.avg_pool = nn.AvgPool1D()
             self.max_pool = nn.MaxPool1D()
         else:
@@ -29,7 +29,7 @@ class atteblock(gluon.nn.HybridBlock):
         for pool_type in self.pool_types:
             if pool_type == 'avg':
                 import pdb;pdb.set_trace()
-                out = self.avg_pool(x)  ###得到单层通道信息
+                out = self.avg_pool(x)  ### 得到单层通道信息
                 out = out.reshape(B, -1)
                 out_raw=self.mlp(out)
 
